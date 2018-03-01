@@ -5,14 +5,17 @@
  */
 package smtp.client;
 
+import java.awt.Color;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -34,32 +37,36 @@ public class SMTPClient extends Application {
         TextField fieldTo = new TextField();
         TextField fieldSubject = new TextField();
         TextArea areaForInput = new TextArea();
-        TextArea areaForLogs = new TextArea();
-        areaForLogs.setEditable(false);
+        areaForInput.setPrefHeight(200);
+        areaForInput.setPrefWidth(230);
+        TextArea areaForTrace = new TextArea();
+        areaForTrace.setEditable(false);
         Button btnSendMessage = new Button("Send");
         Button exit = new Button("Exit");
+        GridPane mainPane = new GridPane();
+        GridPane upPane = new GridPane();
+        GridPane downPane = new GridPane();
         
-        GridPane pane = new GridPane();
+        //Group of labels
+        upPane.add(labelFrom, 0, 0);
+        upPane.add(labelTo, 0, 1);
+        upPane.add(labelSubject, 0, 2);
+         
+        //Group of fields
+        upPane.add(fieldFrom, 1, 0);
+        upPane.add(fieldTo, 1, 1);
+        upPane.add(fieldSubject, 1, 2);
+        downPane.add(btnSendMessage, 0, 0);
+        downPane.add(exit,1,0);
+        mainPane.add(upPane,0,0);
+        mainPane.add(areaForInput, 0, 1);
+        mainPane.add(downPane,0,2);
         
         
         
+        Scene scene = new Scene(mainPane);
         
-
-        
-        btnSendMessage.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-                
-        StackPane root = new StackPane();
-        root.getChildren().add(btnSendMessage);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("SMTP client");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
