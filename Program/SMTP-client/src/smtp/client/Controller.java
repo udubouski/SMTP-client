@@ -5,28 +5,38 @@
  */
 package smtp.client;
 
-import smtp.client.Controller;
+import java.io.IOException;
+import smtp.client.Model;
 /**
  *
  * @author vlad
  */
 public class Controller {
     
+    private Model model;
     
-    /*static PrintStream ps = null;          // посылка сообщений
-    static DataInputStream dis = null;     // получение сообщений
- 
-    public static void send(String str) throws IOException
+    public void send(String str) throws IOException
     {
-        ps.println(str);      // посылка строки на SMTP
-        ps.flush();           // очистка буфера
+        model.getPs().println(str);
+        model.getPs().println(str);      // посылка строки на SMTP
+        model.getPs().flush();           // очистка буфера
         System.out.println("Java sent: " + str);
     }
  
-    public static void receive() throws IOException
+    public void receive() throws IOException
     {
-        String readstr = dis.readLine();  // получение ответа от SMTP
+        String readstr = model.getDis().readLine();  // получение ответа от SMTP
         System.out.println("SMTP respons: " + readstr);
     }
-  */
+    
+    public void exitApp()
+    {
+        System.exit(0);
+    }
+    
+    public void sendMessage()
+    {
+
+    }
+        
 }
