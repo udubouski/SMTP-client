@@ -5,16 +5,15 @@
  */
 package smtp.client;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-
+import smtp.client.Controller;
 /**
  *
  * @author vlad
  */
 public class Controller {
-    static PrintStream ps = null;          // посылка сообщений
+    
+    
+    /*static PrintStream ps = null;          // посылка сообщений
     static DataInputStream dis = null;     // получение сообщений
  
     public static void send(String str) throws IOException
@@ -29,5 +28,5 @@ public class Controller {
         String readstr = dis.readLine();  // получение ответа от SMTP
         System.out.println("SMTP respons: " + readstr);
     }
-  
+  */
 }

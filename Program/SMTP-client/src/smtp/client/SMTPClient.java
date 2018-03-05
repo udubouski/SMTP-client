@@ -5,20 +5,16 @@
  */
 package smtp.client;
 
-import java.awt.Color;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import smtp.client.Model;
 
 
 /**
@@ -27,41 +23,53 @@ import javafx.stage.Stage;
  */
 public class SMTPClient extends Application {
     
+    private Model model;
+    
     @Override
     public void start(Stage primaryStage) {
         
         Label labelFrom = new Label("Mail from:");
         Label labelTo = new Label("Mail to:");
         Label labelSubject = new Label("Subject:");
+        Label labelInput = new Label("Input:");
+        Label labelOutput = new Label("Output:");
         TextField fieldFrom = new TextField();
         TextField fieldTo = new TextField();
         TextField fieldSubject = new TextField();
         TextArea areaForInput = new TextArea();
+        TextArea areaForOutput = new TextArea();
         areaForInput.setPrefHeight(200);
         areaForInput.setPrefWidth(230);
-        TextArea areaForTrace = new TextArea();
-        areaForTrace.setEditable(false);
+        areaForOutput.setPrefHeight(278);
+        areaForOutput.setPrefWidth(230);
+        areaForOutput.setEditable(false);
         Button btnSendMessage = new Button("Send");
-        Button exit = new Button("Exit");
+        Button btnExit = new Button("Exit");
         GridPane mainPane = new GridPane();
-        GridPane upPane = new GridPane();
-        GridPane downPane = new GridPane();
+        GridPane leftPane = new GridPane();
+        GridPane rightPane = new GridPane();
+        GridPane lUpPane = new GridPane();
+        GridPane lDownPane = new GridPane();
         
         //Group of labels
-        upPane.add(labelFrom, 0, 0);
-        upPane.add(labelTo, 0, 1);
-        upPane.add(labelSubject, 0, 2);
+        lUpPane.add(labelFrom, 0, 0);
+        lUpPane.add(labelTo, 0, 1);
+        lUpPane.add(labelSubject, 0, 2);
          
         //Group of fields
-        upPane.add(fieldFrom, 1, 0);
-        upPane.add(fieldTo, 1, 1);
-        upPane.add(fieldSubject, 1, 2);
-        downPane.add(btnSendMessage, 0, 0);
-        downPane.add(exit,1,0);
-        mainPane.add(upPane,0,0);
-        mainPane.add(areaForInput, 0, 1);
-        mainPane.add(downPane,0,2);
-        
+        lUpPane.add(fieldFrom, 1, 0);
+        lUpPane.add(fieldTo, 1, 1);
+        lUpPane.add(fieldSubject, 1, 2);
+        lDownPane.add(btnSendMessage, 0, 0);
+        lDownPane.add(btnExit,1,0);
+        leftPane.add(lUpPane,0,0);
+        leftPane.add(labelInput,0,1);
+        leftPane.add(areaForInput, 0, 2);
+        leftPane.add(lDownPane,0,3);
+        rightPane.add(labelOutput, 0, 0);
+        rightPane.add(areaForOutput, 0, 1);
+        mainPane.add(leftPane,0,0);
+        mainPane.add(rightPane,1,0);
         
         
         Scene scene = new Scene(mainPane);
@@ -69,6 +77,14 @@ public class SMTPClient extends Application {
         primaryStage.setTitle("SMTP client");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        //
+                
+        btnExit.setOnAction((ActionEvent e) ->{
+            System.exit(0);
+        });
+        
+        
     }
     
     /**
@@ -76,13 +92,5 @@ public class SMTPClient extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-
-
-
-    /*private void receive() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
-    
-    
+    }   
 }
