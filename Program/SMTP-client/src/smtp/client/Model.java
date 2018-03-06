@@ -15,9 +15,10 @@ import java.net.Socket;
  */
 
 public class Model {
-    private PrintStream ps = null;          
-    private DataInputStream dis = null; 
     
+   // private static PrintStream ps;          
+   // private static DataInputStream dis;
+    private Socket smtp;
     private String HELO;
     private String MAIL_FROM;
     private String RCPT_TO;
@@ -26,20 +27,30 @@ public class Model {
     private String SUBJECT;
     private String BODY;
     private String END;
-    private Socket smtp;
     
     public Model()
     {
-        HELO = "HELO";
-        MAIL_FROM = "MAIL FROM:";
-        RCPT_TO = "RCPT TO:";
-        DATA = "DATA";   
-        FROM = "from:";
-        SUBJECT = "subject:";
+     //   ps = null;
+     //   dis = null;
+        smtp = null; 
+        
+        HELO = "HELO ";
+        MAIL_FROM = "MAIL FROM: ";
+        RCPT_TO = "RCPT TO: ";
+        DATA = "DATA ";   
+        FROM = "from: ";
+        SUBJECT = "subject: ";
         BODY ="";
         END = ".";
-        smtp = null; 
     }
+
+    /*public static PrintStream getPs() {
+        return ps;
+    }
+
+    public static DataInputStream getDis() {
+        return dis;
+    }*/
 
     public Socket getSmtp() {
         return smtp;
@@ -49,24 +60,6 @@ public class Model {
         this.smtp = smtp;
     }
 
-    
-    public PrintStream getPs() {
-        return ps;
-    }
-
-    public void setPs(PrintStream ps) {
-        this.ps = ps;
-    }
-
-    public DataInputStream getDis() {
-        return dis;
-    }
-
-    public void setDis(DataInputStream dis) {
-        this.dis = dis;
-    }
-
-     
     public String getHELO() {
         return HELO;
     }
@@ -130,9 +123,8 @@ public class Model {
     public void setEND(String END) {
         this.END = END;
     }
-    
 
-    
+  
 }
 
 

@@ -97,12 +97,13 @@ public class View extends Application{
         
         //Handling events
         btnSendMessage.setOnAction((ActionEvent e) ->{
+            controller.setInputData(fieldFrom.getText(), fieldTo.getText(),
+                    fieldSubject.getText(), areaForInput.getText());
             controller.sendMessage();
         });
 
         btnExit.setOnAction((ActionEvent e) ->{
             controller.exitApp();
         });  
-        
     }
 }
