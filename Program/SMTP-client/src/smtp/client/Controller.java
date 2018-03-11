@@ -19,26 +19,34 @@ import smtp.client.Model;
 public class Controller {
     
     private Model model= new Model();
+    
+    private PrintStream ps = null;          // посылка сообщений
+    private DataInputStream dis = null;     // получение сообщений
+    private String text="";
      
     public void exitApp()
     {
         System.exit(0);
     }
-      
-    static PrintStream ps = null;          // посылка сообщений
-    static DataInputStream dis = null;     // получение сообщений
- 
-    public static void send(String str) throws IOException
+    
+    public String getMsg()
+    {
+        return text;
+    }
+    
+    public void send(String str) throws IOException
     {
         ps.println(str);      // посылка строки на SMTP
         ps.flush();           // очистка буфера
         System.out.println("Java sent: " + str);
+        text+=str+"\n";
     }
  
-    public static void receive() throws IOException
+    public  void receive() throws IOException
     {
         String readstr = dis.readLine();  // получение ответа от SMTP
         System.out.println("SMTP respons: " + readstr);
+        text+=readstr+"\n";
     }
      
     public void createSocket()
@@ -76,7 +84,7 @@ public class Controller {
             send(model.getBODY());         // посылка тела сообщения
             send(model.getEND());
             receive();
-            model.getSmtp().close();      
+            model.getSmtp().close();
         }
         catch (IOException e)
         {
@@ -91,7 +99,7 @@ public class Controller {
         model.setMAIL_FROM("MAIL FROM: " + mailFrom);
         model.setRCPT_TO("RCPT TO: " + mailTo);
         model.setFROM("from: " + mailFrom);
-        model.setSUBJECT("subject: " + subject);
+        model.setSUBJECT("subject: " + subject + "\n\n");
         model.setBODY(data);
     }
     
@@ -100,5 +108,4 @@ public class Controller {
         createSocket();
         executeCommands();
     }
-        
 }

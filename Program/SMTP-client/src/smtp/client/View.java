@@ -59,7 +59,7 @@ public class View extends Application{
         areaForInput.setPrefHeight(200);
         areaForInput.setPrefWidth(230);
         areaForOutput.setPrefHeight(278);
-        areaForOutput.setPrefWidth(230);
+        areaForOutput.setPrefWidth(700);
         areaForOutput.setEditable(false);
         btnSendMessage = new Button("Send");
         btnExit = new Button("Exit");
@@ -68,7 +68,6 @@ public class View extends Application{
         rightPane = new GridPane();
         lUpPane = new GridPane();
         lDownPane = new GridPane();
-        
         //Group of labels
         lUpPane.add(labelFrom, 0, 0);
         lUpPane.add(labelTo, 0, 1);
@@ -100,8 +99,9 @@ public class View extends Application{
             controller.setInputData(fieldFrom.getText(), fieldTo.getText(),
                     fieldSubject.getText(), areaForInput.getText());
             controller.sendMessage();
+            areaForOutput.setText(controller.getMsg());
         });
-
+        
         btnExit.setOnAction((ActionEvent e) ->{
             controller.exitApp();
         });  

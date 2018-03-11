@@ -16,8 +16,6 @@ import java.net.Socket;
 
 public class Model {
     
-   // private static PrintStream ps;          
-   // private static DataInputStream dis;
     private Socket smtp;
     private String HELO;
     private String MAIL_FROM;
@@ -30,27 +28,16 @@ public class Model {
     
     public Model()
     {
-     //   ps = null;
-     //   dis = null;
         smtp = null; 
-        
         HELO = "HELO ";
         MAIL_FROM = "MAIL FROM: ";
         RCPT_TO = "RCPT TO: ";
         DATA = "DATA ";   
-        FROM = "from: ";
-        SUBJECT = "subject: ";
+        FROM = "FROM: ";
+        SUBJECT = "SUBJECT: ";
         BODY ="";
         END = ".";
     }
-
-    /*public static PrintStream getPs() {
-        return ps;
-    }
-
-    public static DataInputStream getDis() {
-        return dis;
-    }*/
 
     public Socket getSmtp() {
         return smtp;
@@ -122,9 +109,7 @@ public class Model {
 
     public void setEND(String END) {
         this.END = END;
-    }
-
-  
+    } 
 }
 
 
