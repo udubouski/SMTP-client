@@ -12,16 +12,18 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import smtp.client.Model;
+
 /**
  *
  * @author vlad
  */
+
 public class Controller {
     
     private Model model= new Model();
-    
-    private PrintStream ps = null;          // посылка сообщений
-    private DataInputStream dis = null;     // получение сообщений
+    private PrintStream ps = null;          
+    private DataInputStream dis = null; 
+    private Socket smtp = null;;    
     private String text="";
      
     public void exitApp()
@@ -34,28 +36,23 @@ public class Controller {
         return text;
     }
     
-    public void send(String str) throws IOException
+    public void send(String str) 
     {
-        ps.println(str);      // посылка строки на SMTP
-        ps.flush();           // очистка буфера
-        System.out.println("Java sent: " + str);
+        ps.println(str);      
+        ps.flush();           
         text+=str+"\n";
     }
  
     public  void receive() throws IOException
     {
-        String readstr = dis.readLine();  // получение ответа от SMTP
-        System.out.println("SMTP respons: " + readstr);
+        String readstr = dis.readLine();
         text+=readstr+"\n";
     }
      
     public void createSocket()
     {
-       try {  // заметка: 25 - это стандартный номер порта SMTP
-            Socket smtp = null;
+       try {  
             smtp = new Socket("mx.yandex.ru", 25);
-            model.setSmtp(smtp);
-            smtp = model.getSmtp();
             OutputStream os = smtp.getOutputStream();
             ps = new PrintStream(os);
             InputStream is = smtp.getInputStream();
@@ -63,46 +60,46 @@ public class Controller {
         }
         catch (IOException e)
         {
-            System.out.println("Error connection: " + e);
+            text+="Error connection: " + e + "\n";
         }
     }
     
     public void executeCommands()
     {
-         try {  // скажем SMTP helo
-            receive();          // получение ответа SMTP
+         try {  
+            receive();          
             send(model.getHELO());
-            receive();          // получение ответа SMTP
-            send(model.getMAIL_FROM());    // посылка на SMTP
-            receive();          // получение ответа SMTP
-            send(model.getRCPT_TO());      // посылка адресату SMTP
+            receive();          
+            send(model.getMAIL_FROM());    
+            receive();          
+            send(model.getRCPT_TO());      
             receive();
-            send(model.getDATA());         // начинается посылка на SMTP
-            receive();          // получение ответа SMTP
+            send(model.getDATA());         
+            receive();          
             send(model.getFROM());
             send(model.getSUBJECT());
-            send(model.getBODY());         // посылка тела сообщения
+            send(model.getBODY());         
             send(model.getEND());
             receive();
-            model.getSmtp().close();
+            smtp.close();
         }
         catch (IOException e)
         {
-            System.out.println("Error sending: " + e);
+            text+="Error sending: " + e + "\n";
         }
-        System.out.println("Mail sent!");
+        text+="Mail sent!";
     }
     
     public void setInputData(String mailFrom,String mailTo,String subject,String data)
     {
-        model.setHELO("HELO " + mailFrom);
+        model.setHELO("HELO " + mailFrom.split("@")[1]);
         model.setMAIL_FROM("MAIL FROM: " + mailFrom);
         model.setRCPT_TO("RCPT TO: " + mailTo);
         model.setFROM("from: " + mailFrom);
         model.setSUBJECT("subject: " + subject + "\n\n");
         model.setBODY(data);
     }
-    
+
     public void sendMessage()
     {
         createSocket();

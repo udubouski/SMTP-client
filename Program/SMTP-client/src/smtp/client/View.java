@@ -56,9 +56,9 @@ public class View extends Application{
         fieldSubject = new TextField();
         areaForInput = new TextArea();
         areaForOutput = new TextArea();
-        areaForInput.setPrefHeight(200);
+        areaForInput.setPrefHeight(250);
         areaForInput.setPrefWidth(230);
-        areaForOutput.setPrefHeight(278);
+        areaForOutput.setPrefHeight(328);
         areaForOutput.setPrefWidth(700);
         areaForOutput.setEditable(false);
         btnSendMessage = new Button("Send");
@@ -68,11 +68,14 @@ public class View extends Application{
         rightPane = new GridPane();
         lUpPane = new GridPane();
         lDownPane = new GridPane();
+        
         //Group of labels
         lUpPane.add(labelFrom, 0, 0);
         lUpPane.add(labelTo, 0, 1);
         lUpPane.add(labelSubject, 0, 2);
-         
+        leftPane.add(labelInput,0,1);
+        rightPane.add(labelOutput, 0, 0);
+        
         //Group of fields
         lUpPane.add(fieldFrom, 1, 0);
         lUpPane.add(fieldTo, 1, 1);
@@ -80,10 +83,8 @@ public class View extends Application{
         lDownPane.add(btnSendMessage, 0, 0);
         lDownPane.add(btnExit,1,0);
         leftPane.add(lUpPane,0,0);
-        leftPane.add(labelInput,0,1);
         leftPane.add(areaForInput, 0, 2);
         leftPane.add(lDownPane,0,3);
-        rightPane.add(labelOutput, 0, 0);
         rightPane.add(areaForOutput, 0, 1);
         mainPane.add(leftPane,0,0);
         mainPane.add(rightPane,1,0);

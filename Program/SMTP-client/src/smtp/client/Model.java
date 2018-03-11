@@ -5,8 +5,6 @@
  */
 package smtp.client;
 
-import java.io.DataInputStream;
-import java.io.PrintStream;
 import java.net.Socket;
 
 /**
@@ -16,7 +14,6 @@ import java.net.Socket;
 
 public class Model {
     
-    private Socket smtp;
     private String HELO;
     private String MAIL_FROM;
     private String RCPT_TO;
@@ -28,7 +25,6 @@ public class Model {
     
     public Model()
     {
-        smtp = null; 
         HELO = "HELO ";
         MAIL_FROM = "MAIL FROM: ";
         RCPT_TO = "RCPT TO: ";
@@ -37,14 +33,6 @@ public class Model {
         SUBJECT = "SUBJECT: ";
         BODY ="";
         END = ".";
-    }
-
-    public Socket getSmtp() {
-        return smtp;
-    }
-
-    public void setSmtp(Socket smtp) {
-        this.smtp = smtp;
     }
 
     public String getHELO() {
