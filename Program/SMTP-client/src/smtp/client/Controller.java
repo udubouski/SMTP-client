@@ -87,12 +87,13 @@ public class Controller {
         {
             text+="Error sending: " + e + "\n";
         }
-        text+="Mail sent!";
+        text+="Mail sent!\n\n";
     }
     
     public void setInputData(String mailFrom,String mailTo,String subject,String data)
     {
         model.setHELO("HELO " + mailFrom.split("@")[1]);
+        //model.setHELO("HELO " + mailFrom);
         model.setMAIL_FROM("MAIL FROM: " + mailFrom);
         model.setRCPT_TO("RCPT TO: " + mailTo);
         model.setFROM("from: " + mailFrom);

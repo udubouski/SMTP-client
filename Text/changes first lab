@@ -1,0 +1,5 @@
+lab_1:
+- change name of classes
+- change class controller divide on 2 subclass (createSocket and executeCommands)
+- create class message in view
+
