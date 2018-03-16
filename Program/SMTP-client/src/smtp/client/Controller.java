@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import smtp.client.Model;
+import smtp.client.Message;
 
 /**
  *
@@ -25,12 +26,7 @@ public class Controller {
     private DataInputStream dis = null; 
     private Socket smtp = null;;    
     private String text="";
-     
-    public void exitApp()
-    {
-        System.exit(0);
-    }
-    
+         
     public String getMsg()
     {
         return text;
@@ -90,15 +86,15 @@ public class Controller {
         text+="Mail sent!\n\n";
     }
     
-    public void setInputData(String mailFrom,String mailTo,String subject,String data)
+    public void setInputData(Message message)
     {
-        model.setHELO("HELO " + mailFrom.split("@")[1]);
+        model.setHELO("HELO " + message.getMsgFromSmb().split("@")[1]);
         //model.setHELO("HELO " + mailFrom);
-        model.setMAIL_FROM("MAIL FROM: " + mailFrom);
-        model.setRCPT_TO("RCPT TO: " + mailTo);
-        model.setFROM("from: " + mailFrom);
-        model.setSUBJECT("subject: " + subject + "\n\n");
-        model.setBODY(data);
+        model.setMAIL_FROM("MAIL FROM: " + message.getMsgFromSmb());
+        model.setRCPT_TO("RCPT TO: " + message.getMsgToSmb());
+        model.setFROM("from: " + message.getMsgFromSmb());
+        model.setSUBJECT("subject: " + message.getSubject() + "\n\n");
+        model.setBODY(message.getMsgData());
     }
 
     public void sendMessage()

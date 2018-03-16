@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import smtp.client.Controller;
+import smtp.client.Message;
 
 /**
  *
@@ -23,6 +24,7 @@ import smtp.client.Controller;
 public class View extends Application{
     
     private Controller controller;
+    private Message message;
     private Scene scene;
     private Label labelFrom;
     private Label labelTo;
@@ -46,6 +48,7 @@ public class View extends Application{
     public void start(Stage primaryStage){
         
         controller = new Controller();
+        message = new Message();
         labelFrom = new Label("Mail from:");
         labelTo = new Label("Mail to:");
         labelSubject = new Label("Subject:");
@@ -97,14 +100,15 @@ public class View extends Application{
         
         //Handling events
         btnSendMessage.setOnAction((ActionEvent e) ->{
-            controller.setInputData(fieldFrom.getText(), fieldTo.getText(),
+            message.setValueMsg(fieldFrom.getText(), fieldTo.getText(),
                     fieldSubject.getText(), areaForInput.getText());
+            controller.setInputData(message);
             controller.sendMessage();
             areaForOutput.setText(controller.getMsg());
         });
         
         btnExit.setOnAction((ActionEvent e) ->{
-            controller.exitApp();
+            System.exit(0);
         });  
     }
 }
