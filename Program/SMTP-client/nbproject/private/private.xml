@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/vlad/Project/BSUIR/SMTP-client/Program/SMTP-client/src/smtp/client/Controller.java</file>
-            <file>file:/home/vlad/Project/BSUIR/SMTP-client/Program/SMTP-client/src/smtp/client/View.java</file>
-            <file>file:/home/vlad/Project/BSUIR/SMTP-client/Program/SMTP-client/src/smtp/client/Model.java</file>
+            <file>file:/home/vlad/Project/BSUIR/AIPOS/1/SMTP-client/Program/SMTP-client/src/smtp/client/InitSocket.java</file>
+            <file>file:/home/vlad/Project/BSUIR/AIPOS/1/SMTP-client/Program/SMTP-client/src/smtp/client/MainForm.java</file>
+            <file>file:/home/vlad/Project/BSUIR/AIPOS/1/SMTP-client/Program/SMTP-client/src/smtp/client/Request.java</file>
+            <file>file:/home/vlad/Project/BSUIR/AIPOS/1/SMTP-client/Program/SMTP-client/src/smtp/client/Command.java</file>
+            <file>file:/home/vlad/Project/BSUIR/AIPOS/1/SMTP-client/Program/SMTP-client/src/smtp/client/Message.java</file>
         </group>
     </open-files>
 </project-private>

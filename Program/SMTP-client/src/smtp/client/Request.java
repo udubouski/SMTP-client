@@ -12,7 +12,7 @@ import java.net.Socket;
  * @author vlad
  */
 
-public class Model {
+public class Request {
     
     private String HELO;
     private String MAIL_FROM;
@@ -23,7 +23,7 @@ public class Model {
     private String BODY;
     private String END;
     
-    public Model()
+    public Request()
     {
         HELO = "HELO ";
         MAIL_FROM = "MAIL FROM: ";
